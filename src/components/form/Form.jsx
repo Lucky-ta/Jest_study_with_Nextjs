@@ -5,26 +5,26 @@ import * as ButtonComponents from "../buttons/index";
 import WarningValidation from "../warningValidation/warningValidation";
 
 function Form() {
-  const [formInputs, setFormInputs] = useState([]);
+    const FORM_INITIAL_VALUE = {name: '', email: '', password: ''};
+  const [formInputs, setFormInputs] = useState(FORM_INITIAL_VALUE);
 
   const handleFormInputValues = ({ target }) => {
     setFormInputs({
       ...formInputs,
       [target.id]: target.value,
     });
-
-    console.log(formInputs);
   };
 
   const isButtonActive = () => {
-    if (!formInputs.name) return true;
-    if (!formInputs.email) return true;
-    if (!formInputs.password) return true;
+    const validFormArrayFields = ['name', 'email', 'password']
+    const validate = validFormArrayFields.some((key) => formInputs[key].length === 0 );
+
+    if (validate) return true;
     return false;
   };
 
   const handleButton = () => {
-    console.log("Enviado!");
+    console.log('Enviado!');
   };
 
   return (
