@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import * as FormComponents from "./index";
 import * as InputComponents from "../Inputs/index";
 import * as ButtonComponents from "../buttons/index";
-import WarningValidation from "../warningValidation/warningValidation";
+import WarningValidation from "../warningValidation/WarningValidation";
+import SentFormMessage from "../sentFormMessage/SentFormMessage";
 
 function Form() {
   const FORM_INITIAL_VALUE = { name: "", email: "", password: "" };
   const [formInputs, setFormInputs] = useState(FORM_INITIAL_VALUE);
+  const [isValidForm, setIsValidForm] = useState(false);
 
   const handleFormInputValues = ({ target }) => {
     setFormInputs({
@@ -26,7 +28,7 @@ function Form() {
   };
 
   const handleButton = () => {
-    console.log("Enviado!");
+    setIsValidForm(true);
   };
 
   return (
@@ -63,6 +65,7 @@ function Form() {
       >
         Entrar
       </ButtonComponents.BasicButton>
+      {isValidForm && <SentFormMessage />}
     </FormComponents.FormContainer>
   );
 }

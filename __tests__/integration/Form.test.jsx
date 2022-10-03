@@ -79,15 +79,12 @@ describe("Test form component interactions", () => {
     const passwordInput = screen.getByPlaceholderText("Senha");
     const sendFormButton = screen.getByRole("button");
 
-    const sentMessage = screen.getByText(/Sent/i);
-    expect(sentMessage).not.toBeInTheDocument();
-
-
     await userEvent.type(nameInput, "Lucas");
     await userEvent.type(emailInput, "lucmaieski@gmail.com");
     await userEvent.type(passwordInput, "123456789");
     await userEvent.click(sendFormButton);
 
+    const sentMessage = screen.getByText(/Sent/i);
     expect(sentMessage).toBeInTheDocument();
   });
 });
