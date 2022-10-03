@@ -48,10 +48,28 @@ describe("Test form component interactions", () => {
     expect(passwordRequiredError).not.toBeInTheDocument();
   });
 
-  it('Send form button must be disabled at start', () => {
-    const sendFormButton = screen.getByRole('button');
+  it("Send form button must be disabled at start", () => {
+    const sendFormButton = screen.getByRole("button");
 
     expect(sendFormButton).toBeInTheDocument();
     expect(sendFormButton.disabled).toBe(true);
-  })
+  });
+
+  it("Send form button must be enabled with all filled inputs", async () => {
+    const sendFormButton = screen.getByRole("button");
+
+    expect(sendFormButton).toBeInTheDocument();
+    expect(sendFormButton.disabled).toBe(true);
+
+    const nameInput = screen.getByPlaceholderText("Nome");
+    const emailInput = screen.getByPlaceholderText("E-mail");
+    const passwordInput = screen.getByPlaceholderText("Senha");
+
+    await userEvent.type(nameInput, "Lucas");
+    await userEvent.type(emailInput, "lucmaieski@gmail.com");
+    await userEvent.type(passwordInput, "123456789");
+
+    expect(sendFormButton).toBeInTheDocument();
+    expect(sendFormButton.disabled).toBe(false);
+  });
 });
