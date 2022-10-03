@@ -9,24 +9,23 @@ function Form() {
 
   const handleFormInputValues = ({ target }) => {
     setFormInputs({
-        ...formInputs,
-        [target.id]: target.value
-    })
+      ...formInputs,
+      [target.id]: target.value,
+    });
 
-    console.log(formInputs)
-
+    console.log(formInputs);
   };
 
   const isButtonActive = () => {
     if (!formInputs.name) return true;
     if (!formInputs.email) return true;
     if (!formInputs.password) return true;
-    return false
+    return false;
   };
 
   const handleButton = () => {
-    console.log('Enviado!');
-  }
+    console.log("Enviado!");
+  };
 
   return (
     <FormComponents.FormContainer>
@@ -37,7 +36,7 @@ function Form() {
           id="name"
           placeholder="Nome"
         />
-        { !formInputs.name && <WarningValidation fieldName="Name"/>}
+        {!formInputs.name && <WarningValidation fieldName="Name" />}
 
         <InputComponents.BasicInput
           onChange={(e) => handleFormInputValues(e)}
@@ -45,7 +44,7 @@ function Form() {
           id="email"
           placeholder="E-mail"
         />
-        { !formInputs.email && <WarningValidation fieldName="E-mail"/>}
+        {!formInputs.email && <WarningValidation fieldName="E-mail" />}
 
         <InputComponents.BasicInput
           onChange={(e) => handleFormInputValues(e)}
@@ -53,8 +52,7 @@ function Form() {
           id="password"
           placeholder="Senha"
         />
-        { !formInputs.password && <WarningValidation fieldName="Password"/>}
-
+        {!formInputs.password && <WarningValidation fieldName="Password" />}
       </FormComponents.FormInputsContainer>
       <ButtonComponents.BasicButton
         type="button"

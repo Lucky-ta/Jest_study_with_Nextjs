@@ -1,7 +1,8 @@
 import React from "react";
+import * as HeadingComponent from './index';
 
 function WarningValidation({ fieldName }) {
-    return <h1>{`${fieldName} is required`}</h1>
+    return <HeadingComponent.WarningName>{`${fieldName} is required`}</HeadingComponent.WarningName>
 };
 
 export default WarningValidation;
