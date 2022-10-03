@@ -72,4 +72,22 @@ describe("Test form component interactions", () => {
     expect(sendFormButton).toBeInTheDocument();
     expect(sendFormButton.disabled).toBe(false);
   });
+
+  it("must have a `Sent` message after click on send form button with valid input values", async () => {
+    const nameInput = screen.getByPlaceholderText("Nome");
+    const emailInput = screen.getByPlaceholderText("E-mail");
+    const passwordInput = screen.getByPlaceholderText("Senha");
+    const sendFormButton = screen.getByRole("button");
+
+    const sentMessage = screen.getByText(/Sent/i);
+    expect(sentMessage).not.toBeInTheDocument();
+
+
+    await userEvent.type(nameInput, "Lucas");
+    await userEvent.type(emailInput, "lucmaieski@gmail.com");
+    await userEvent.type(passwordInput, "123456789");
+    await userEvent.click(sendFormButton);
+
+    expect(sentMessage).toBeInTheDocument();
+  });
 });
