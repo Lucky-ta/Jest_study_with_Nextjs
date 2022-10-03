@@ -47,4 +47,11 @@ describe("Test form component interactions", () => {
     expect(emailRequiredError).not.toBeInTheDocument();
     expect(passwordRequiredError).not.toBeInTheDocument();
   });
+
+  it('Send form button must be disabled at start', () => {
+    const sendFormButton = screen.getByRole('button');
+
+    expect(sendFormButton).toBeInTheDocument();
+    expect(sendFormButton.disabled).toBe(true);
+  })
 });
