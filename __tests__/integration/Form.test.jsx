@@ -2,10 +2,17 @@ import Form from "../../src/components/form/Form";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
+import { createMockRouter } from "../../testUtils/useRouterMock";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 
 describe("Test form component interactions", () => {
+  const router = createMockRouter({})
   beforeEach(() => {
-    render(<Form />);
+    render(
+      <RouterContext.Provider value={router}>
+        <Form />
+      </RouterContext.Provider>
+    );
   });
 
   it("must have a required field error message with empty inputs", () => {
@@ -73,7 +80,7 @@ describe("Test form component interactions", () => {
     expect(sendFormButton.disabled).toBe(false);
   });
 
-  it("must have a `Sent` message after click on send form button with valid input values", async () => {
+  it("must redirect to `/home` path after send form with valid datas", async () => {
     const nameInput = screen.getByPlaceholderText("Nome");
     const emailInput = screen.getByPlaceholderText("E-mail");
     const passwordInput = screen.getByPlaceholderText("Senha");
@@ -84,7 +91,6 @@ describe("Test form component interactions", () => {
     await userEvent.type(passwordInput, "123456789");
     await userEvent.click(sendFormButton);
 
-    const sentMessage = screen.getByText(/Sent/i);
-    expect(sentMessage).toBeInTheDocument();
+    expect(router.push).toHaveBeenCalledWith('/home');
   });
 });
